@@ -18,17 +18,17 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-// Assign variable value for albumId
-albumId = 1
+// Assign variable value for photoId
+photoId = 1
 
 // Create a map for the variable
 variables = [
-	('albumId') : albumId
+	('photoId') : photoId
 ]
 
 // Send the DELETE request with variables
-response = WS.sendRequest(findTestObject('Object Repository/Obj-req-api/Obj-albums/DELETE album', variables))
+response = WS.sendRequest(findTestObject('Object Repository/Obj-req-api/Obj-photos/DELETE photo', variables))
 
-// Verify the response status code is 200 or 204
+// Verify the response status code is 200
 WS.verifyResponseStatusCode(response, 200)
-KeywordUtil.logInfo('Album with id ' + albumId + ' is deleted successfully.')
+KeywordUtil.logInfo('Photo with id ' + photoId + ' is deleted successfully.')
