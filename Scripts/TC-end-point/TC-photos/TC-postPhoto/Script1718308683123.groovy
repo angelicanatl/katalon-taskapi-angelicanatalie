@@ -18,17 +18,27 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-// Assign variable value for albumId
-albumId = 1
+// Load test data from CSV
+testData = findTestData('Data Files/Test Data/TD-photos')
 
-// Create a map for the variable
-variables = [
-	('albumId') : albumId
-]
 
-// Send the DELETE request with variables
-response = WS.sendRequest(findTestObject('Object Repository/Obj-req-api/Obj-albums/DELETE album', variables))
+// Initialize properties that going to be checked for new posted album
+newAlbumId = 1;
+newTitle = 'new album';
+newUrl =  "https://via.placeholder.com/600/92c952";
+newThumbnail = 'https://via.placeholder.com/150/92c952';
 
-// Verify the response status code is 200 or 204
-WS.verifyResponseStatusCode(response, 200)
-KeywordUtil.logInfo('Album with id ' + albumId + ' is deleted successfully.')
+// Send the POST request
+response = WS.sendRequest(findTestObject('Object Repository/Obj-req-api/Obj-photos/POST photo'))
+
+// Verify the response status code is 201
+WS.verifyResponseStatusCode(response, 201)
+
+// Verify the properties of the posted photo
+WS.verifyElementPropertyValue(response, 'albumId', newAlbumId)
+WS.verifyElementPropertyValue(response, 'title', newTitle)
+WS.verifyElementPropertyValue(response, 'url', newUrl)
+WS.verifyElementPropertyValue(response, 'thumbnailUrl', newThumbnail)
+
+// Log verification success
+KeywordUtil.logInfo('New posted photo properties verified successfully.')
