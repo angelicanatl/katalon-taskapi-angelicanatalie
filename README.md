@@ -1,2 +1,2 @@
 # katalon-taskapi-angelicanatalie
-Task API Testing using Katalon Studio - GITS 2024
+Task API Testing Automation using Katalon Studio - GITS 2024
